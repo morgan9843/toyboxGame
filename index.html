@@ -5,6 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
+	<link rel="stylesheet" type="text/css" href="bar.css">
+
 	<style>
 		body{
 			margin: 0;
@@ -14,6 +16,10 @@
 
 </head>
 <body>
+
+	<div class="icon-bar">
+	<a href="https://www.make.toys"><img src="GameLogo.png" height="32" style="margin:5px 10px"></a>
+	</div>
 
 	<script src="three.js"></script>
     <canvas id="myCanvas"></canvas>
@@ -26,7 +32,6 @@
 
     var clock = new THREE.Clock();
 	var delta = clock.getDelta(); // seconds.
-
 
 	init();
 	animate();
@@ -50,10 +55,10 @@
 
         //LOOK FOR RESIZE
 		window.addEventListener( 'resize', onWindowResize, false );
-	
+	 	
 		//RENDERER
         renderer = new THREE.WebGLRenderer({canvas: document.getElementById('myCanvas'), antialias: true});
-        renderer.setClearColor(0xFF614D);
+        renderer.setClearColor(0xff794d);
 		renderer.setPixelRatio(window.devicePixelRatio);
 		renderer.setSize(window.innerWidth, window.innerHeight);
 

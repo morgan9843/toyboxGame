@@ -1,0 +1,5 @@
+.icon-bar {
+    width: 100%; /* Full-width */
+    background-color: #ff614d; /* Dark-grey background */
+    overflow: auto; /* Overflow due to float */
+}
