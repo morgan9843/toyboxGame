@@ -39,7 +39,7 @@
 	function init(){
 
 		//CAMERA
-		camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 3000);
+		camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, - 500, 1000 );
 		camera.position.set( 0, 0, 0 );
 		camera.updateProjectionMatrix();
 
@@ -63,50 +63,58 @@
 		renderer.setSize(window.innerWidth, window.innerHeight);
 
         //LOAD OBJECTS
-        dragospawn();
+        // dragospawn();
 
+        //Test Sphere
+		var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+		object = new THREE.Mesh( new THREE.SphereGeometry( 75, 20, 10 ), material );
+		object.position.set( 0, 0, 200 );
+		scene.add( object );
 	}
 
-	//Object Drago
-	function dragospawn(){
+	// //Object Drago
+	// function dragospawn(){
 		
-		var loader = new THREE.ObjectLoader();
+	// 	var loader = new THREE.ObjectLoader();
 
-		loader.load(
-		    // resource URL
-		    "model.json",
+	// 	loader.load(
+	// 	    // resource URL
+	// 	    "model.json",
 
-			// pass the loaded data to the onLoad function.
-			//Here it is assumed to be an object
-		    function ( obj ) {
-		    	//move
-		        obj.position.set(0, -.5, -4);
-		        //rotate objext 25 degrees
-		        obj.rotateX((25 * Math.PI)/180);
-				//add the loaded object to the scene
-		        scene.add( obj );
-		        //Name the drago
-		        obj.name = "model";
-		    },
+	// 		// pass the loaded data to the onLoad function.
+	// 		//Here it is assumed to be an object
+	// 	    function ( obj ) {
+	// 	    	//move
+	// 	        obj.position.set(0, -.5, -4);
+	// 	        //rotate objext 25 degrees
+	// 	        obj.rotateX((25 * Math.PI)/180);
+	// 			//add the loaded object to the scene
+	// 	        scene.add( obj );
+	// 	        //Name the drago
+	// 	        obj.name = "model";
+	// 	    },
 
-		    // Function called when download progresses
-		    function ( xhr ) {
-		        console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-		    },
+	// 	    // Function called when download progresses
+	// 	    function ( xhr ) {
+	// 	        console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+	// 	    },
 
-		    // Function called when download errors
-		    function ( xhr ) {
-		        console.error( 'An error happened' );
-		    }
-		);
-	}
+	// 	    // Function called when download errors
+	// 	    function ( xhr ) {
+	// 	        console.error( 'An error happened' );
+	// 	    }
+	// 	);
+	// }
 		
 	//RESIZE
 	function onWindowResize() {
-		camera.aspect = window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
 		renderer.setSize( window.innerWidth, window.innerHeight );
-	    renderer.render(scene, camera);
+		camera.left = -window.innerWidth / 2;
+        camera.right = window.innerWidth / 2;
+        camera.top = window.innerHeight / 2;
+        camera.bottom = -window.innerHeight / 2;
+		camera.updateProjectionMatrix();
+		render();
 	}
 
     //ANIMATE
@@ -118,10 +126,8 @@
     //RENDER
     function render() {
     	renderer.render(scene, camera);
-
-    	var obj = scene.getObjectByName("model");
-    	obj.rotateZ((.1 * Math.PI)/180);
-
+    	// var obj = scene.getObjectByName("model");
+    	// obj.rotateZ((.1 * Math.PI)/180);
     }
 
 	</script>
